@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Keyboard</title>
+  <style>
+    #keyboard {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="keyboard"></div>
+
+  <script>
+    // Function to create a button and add it to the keyboard
+    function createButton(key) {
+      var button = document.createElement("button");
+      button.textContent = key;
+      button.addEventListener("click", function() {
+        // You can handle the key press event here
+        console.log("Key pressed: " + key);
+      });
+      return button;
+    }
+
+    // Function to generate the virtual keyboard
+    function generateKeyboard() {
+      var keyboardContainer = document.getElementById("keyboard");
+      var keys = "1234567890qwertyuiopasdfghjklzxcvbnm".split("");
+
+      keys.forEach(function(key) {
+        var button = createButton(key);
+        keyboardContainer.appendChild(button);
+      });
+    }
+
+    // Generate the keyboard on page load
+    window.onload = generateKeyboard;
+  </script>
+
+</body>
+</html>

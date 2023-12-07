@@ -3,50 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Keyboard</title>
+  <title>Online Piano</title>
   <style>
-    #keyboard {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 5px;
-      margin: 20px;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
-    button {
-      padding: 10px;
-      font-size: 16px;
+    .piano-key {
+      width: 50px;
+      height: 200px;
+      background-color: white;
+      border: 1px solid #ccc;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .black-key {
+      position: relative;
+      width: 30px;
+      height: 120px;
+      background-color: black;
+      margin-right: -15px;
+      z-index: 1;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <div id="keyboard"></div>
+  <div id="piano"></div>
 
   <script>
-    // Function to create a button and add it to the keyboard
-    function createButton(key) {
-      var button = document.createElement("button");
-      button.textContent = key;
-      button.addEventListener("click", function() {
-        // You can handle the key press event here
-        console.log("Key pressed: " + key);
-      });
-      return button;
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+      const pianoContainer = document.getElementById("piano");
 
-    // Function to generate the virtual keyboard
-    function generateKeyboard() {
-      var keyboardContainer = document.getElementById("keyboard");
-      var keys = "1234567890qwertyuiopasdfghjklzxcvbnm".split("");
+      const whiteKeys = ["C", "D", "E", "F", "G", "A", "B"];
+      const blackKeys = ["C#", "D#", "F#", "G#", "A#"];
 
-      keys.forEach(function(key) {
-        var button = createButton(key);
-        keyboardContainer.appendChild(button);
-      });
-    }
+      function createKey(note) {
+        const key = document.createElement("div");
+        key.className = blackKeys.includes(note) ? "piano-key black-key" : "piano-key";
+        key.textContent = note;
+        key.addEventListener("mousedown", () => playSound(note));
+        pianoContainer.appendChild(key);
+      }
 
-    // Generate the keyboard on page load
-    window.onload = generateKeyboard;
+      function playSound(note) {
+        const audio = new Audio(`path/to/sounds/${note}.mp3`); // You need to replace this with the actual path to your sound files
+        audio.play();
+      }
+
+      function generatePiano() {
+        whiteKeys.forEach(createKey);
+        blackKeys.forEach(createKey);
+      }
+
+      generatePiano();
+    });
   </script>
 
 </body>

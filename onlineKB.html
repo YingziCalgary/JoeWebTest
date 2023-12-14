@@ -6,16 +6,16 @@
   <title>Online Piano</title>
   <style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      justify-content: left;
+      align-items: top;
       height: 100vh;
       margin: 0;
     }
 
     .piano-key {
       width: 50px;
-      height: 60px;
+      height: 80px;
       background-color: white;
       border: 1px solid #ccc;
       margin-right: 5px;
@@ -25,9 +25,10 @@
     .black-key {
       position: relative;
       width: 30px;
-      height: 40px;
+      height: 60px;
       background-color: black;
-      margin-right: -15px;
+      color: white;
+      margin-right: 5px;
       z-index: 1;
       cursor: pointer;
     }
@@ -42,10 +43,10 @@
       const pianoContainer = document.getElementById("piano");
 
       const whiteKeys = ["C", "D", "E", "F", "G", "A", "B"];
-      const blackKeys = ["C#", "D#", "F#", "G#", "A#"];
+      const blackKeys = ["Db", "Eb", "Gb", "Ab", "Bb"];
 
       function createKey(note) {
-        const key = document.createElement("div");
+        const key = document.createElement("button");
         key.className = blackKeys.includes(note) ? "piano-key black-key" : "piano-key";
         key.textContent = note;
         key.addEventListener("mousedown", () => playSound(note));
@@ -58,8 +59,18 @@
       }
 
       function generatePiano() {
-        whiteKeys.forEach(createKey);
-        blackKeys.forEach(createKey);
+//        whiteKeys.forEach(createKey);
+//        blackKeys.forEach(createKey);
+        createKey('C')
+        createKey('Db')
+        createKey('D')
+        createKey('Eb')
+        createKey('F')
+        createKey('Gb')
+        createKey('G')
+        createKey('Ab')
+        createKey('A')
+        createKey('Bb')
       }
 
       generatePiano();
